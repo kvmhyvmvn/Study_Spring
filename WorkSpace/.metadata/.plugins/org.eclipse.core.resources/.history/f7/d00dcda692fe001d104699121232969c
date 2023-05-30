@@ -1,0 +1,13 @@
+package com.hanul.web;
+
+import org.springframework.stereotype.Controller;
+
+@Controller
+public class TestController {
+	
+	public String first() {
+		// 비즈니스 로직
+		// 응답화면 연결
+		return "index";
+	}
+}
