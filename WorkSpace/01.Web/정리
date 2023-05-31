@@ -24,5 +24,14 @@
    -> setViewName("응답화면명")
    -> return ModelAndView 객체
 
-<전송된 데이터 접근 방법>
+<전송된 파라미터 데이터 접근 방법>
 1. HttpServletRequest 사용
+2. @RequestParam 사용
+3. 데이터 객체
+
+<경로 접근 방법 : @PathVariable 사용>
+
+응답 화면 연결형태
+1. forward 방식 - 요청 uri가 그대로 유지됨
+2. redirect 방식 - 요청 uri가 바뀜
+
