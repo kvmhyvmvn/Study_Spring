@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="DBTest.connect" project="99.Test" tests="2" started="1" failures="0" errors="0" ignored="0">
-  <testsuite name="com.my.app.DBTest" incomplete="true" displayname="DBTest" uniqueid="[engine:junit-jupiter]/[class:com.my.app.DBTest]">
-    <testcase name="connect" classname="com.my.app.DBTest" incomplete="true" displayname="connect()" uniqueid="[engine:junit-jupiter]/[class:com.my.app.DBTest]/[method:connect()]"/>
-  </testsuite>
-  <testsuite name="com.my.app.DBTest" incomplete="true" displayname="DBTest" uniqueid="[engine:junit-vintage]/[runner:com.my.app.DBTest]">
-    <testcase name="com.my.app.DBTest" classname="com.my.app.DBTest" incomplete="true" displayname="initializationError" uniqueid="[engine:junit-vintage]/[runner:com.my.app.DBTest]/[test:initializationError(com.my.app.DBTest)]"/>
-  </testsuite>
-</testrun>
