@@ -1,0 +1,94 @@
+[
+    {
+        "merged": "com.example.and03_linearlayout.app-merged_res-28:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "com.example.and03_linearlayout.app-main-30:/mipmap-mdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.and03_linearlayout.app-merged_res-28:/layout_lineartest.xml.flat",
+        "source": "com.example.and03_linearlayout.app-main-30:/layout/lineartest.xml"
+    },
+    {
+        "merged": "com.example.and03_linearlayout.app-merged_res-28:/mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "com.example.and03_linearlayout.app-main-30:/mipmap-xxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.and03_linearlayout.app-merged_res-28:/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "com.example.and03_linearlayout.app-main-30:/mipmap-xxxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.and03_linearlayout.app-merged_res-28:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.and03_linearlayout.app-main-30:/mipmap-xxxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.and03_linearlayout.app-merged_res-28:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.example.and03_linearlayout.app-main-30:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.example.and03_linearlayout.app-merged_res-28:/mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.and03_linearlayout.app-main-30:/mipmap-hdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.and03_linearlayout.app-merged_res-28:/layout_linear2.xml.flat",
+        "source": "com.example.and03_linearlayout.app-main-30:/layout/linear2.xml"
+    },
+    {
+        "merged": "com.example.and03_linearlayout.app-merged_res-28:/layout_linear3.xml.flat",
+        "source": "com.example.and03_linearlayout.app-main-30:/layout/linear3.xml"
+    },
+    {
+        "merged": "com.example.and03_linearlayout.app-merged_res-28:/layout_activity_main.xml.flat",
+        "source": "com.example.and03_linearlayout.app-main-30:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.example.and03_linearlayout.app-merged_res-28:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.example.and03_linearlayout.app-main-30:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "com.example.and03_linearlayout.app-merged_res-28:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.and03_linearlayout.app-main-30:/mipmap-xxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.and03_linearlayout.app-merged_res-28:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.example.and03_linearlayout.app-main-30:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.example.and03_linearlayout.app-merged_res-28:/layout_linear4.xml.flat",
+        "source": "com.example.and03_linearlayout.app-main-30:/layout/linear4.xml"
+    },
+    {
+        "merged": "com.example.and03_linearlayout.app-merged_res-28:/mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.and03_linearlayout.app-main-30:/mipmap-xhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.and03_linearlayout.app-merged_res-28:/drawable-v24_ic_launcher_foreground.xml.flat",
+        "source": "com.example.and03_linearlayout.app-main-30:/drawable-v24/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.example.and03_linearlayout.app-merged_res-28:/mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.and03_linearlayout.app-main-30:/mipmap-mdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.and03_linearlayout.app-merged_res-28:/mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "com.example.and03_linearlayout.app-main-30:/mipmap-xhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.and03_linearlayout.app-merged_res-28:/xml_backup_rules.xml.flat",
+        "source": "com.example.and03_linearlayout.app-main-30:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "com.example.and03_linearlayout.app-merged_res-28:/xml_data_extraction_rules.xml.flat",
+        "source": "com.example.and03_linearlayout.app-main-30:/xml/data_extraction_rules.xml"
+    },
+    {
+        "merged": "com.example.and03_linearlayout.app-merged_res-28:/layout_etc_attributes.xml.flat",
+        "source": "com.example.and03_linearlayout.app-main-30:/layout/etc_attributes.xml"
+    },
+    {
+        "merged": "com.example.and03_linearlayout.app-merged_res-28:/layout_linear1_weight.xml.flat",
+        "source": "com.example.and03_linearlayout.app-main-30:/layout/linear1_weight.xml"
+    },
+    {
+        "merged": "com.example.and03_linearlayout.app-merged_res-28:/mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "com.example.and03_linearlayout.app-main-30:/mipmap-hdpi/ic_launcher.webp"
+    }
+]
