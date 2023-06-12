@@ -15,6 +15,30 @@ import smart.hr.HrDAO;
 public class HrController {
 	@Autowired private HrDAO service;
 	
+	// 신규사원등록처리 요청
+	@RequestMapping("/register")
+	public String register(EmployeeVO vo) {
+		service.employee_insert(vo);
+		return "redirect:list";
+	}
+	
+	// 신규사원등록화면 요청
+	@RequestMapping("/new")
+	public String insert(Model model) {
+		model.addAttribute("departments", service.department_list());
+		model.addAttribute("jobs", service.job_list());
+		return "hr/new";
+	}
+	
+	// 사원정보 삭제처리 요청
+	@RequestMapping("/delete")
+	public String delete(int id) {
+		// 해당 사원정보 DB에서 삭제한 후
+		service.employee_delete(id);
+		// 목록 화면으로 연결
+		return "redirect:list";
+	}
+	
 	// 사원정보 수정저장처리 요청
 	@RequestMapping("/update")
 	public String update(EmployeeVO vo) {

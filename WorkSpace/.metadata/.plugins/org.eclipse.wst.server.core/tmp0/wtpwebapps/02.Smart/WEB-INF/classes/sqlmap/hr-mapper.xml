@@ -2,12 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="hr">
 
+	<!-- 신규사원정보 등록 -->
+	<insert id="insert">
+		insert into employees(employee_id, first_name, last_name, email,
+		phone_number, salary, hire_date, department_id, job_id)
+		values(employees_seq.nextval, #{first_name}, #{last_name}, #{email},
+		#{phone_number}, #{salary}, #{hire_date}, #{department_id}, #{job_id}
+		)
+	</insert>
+
+	<!-- 사원정보 삭제 -->
+	<delete id="delete">
+		delete from employees where employee_id =
+		#{employee_id}
+	</delete>
+
 	<!-- 사원정보 변경저장 -->
 	<update id="update">
 		update employees
-		set last_name = #{last_name}, first_name = #{first_name}, email =
+		set last_name = #{last_name}, first_name =
+		#{first_name}, email =
 		#{email}
-		, phone_number = #{phone_number}, salary = #{salary}, hire_date =
+		, phone_number = #{phone_number}, salary
+		= #{salary}, hire_date =
 		#{hire_date}
 		, job_id = #{job_id}
 		<if test="department_id == -1">, department_id = null</if>
@@ -49,7 +66,7 @@
 
 	<!-- 전체사원정보조회 -->
 	<select id="list" resultType="smart.hr.EmployeeVO">
-		select employee_id, last_name||' '||first_name name, e.department_id,
+		select employee_id, first_name||' '||last_name name, e.department_id,
 		department_name
 		, job_id, job_title, hire_date
 		from departments d right

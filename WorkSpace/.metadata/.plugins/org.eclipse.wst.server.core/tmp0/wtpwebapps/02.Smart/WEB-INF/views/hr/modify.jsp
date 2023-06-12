@@ -8,8 +8,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h3 class="my-4">정보수정</h3>
-	<form method="post" action="update">
+	<h3 class="my-4">사원등록</h3>
+	<form method="post" action="insert">
 		<input type="hidden" name="employee_id" value="${vo.employee_id }">
 		<table class="tb-row">
 			<colgroup>
