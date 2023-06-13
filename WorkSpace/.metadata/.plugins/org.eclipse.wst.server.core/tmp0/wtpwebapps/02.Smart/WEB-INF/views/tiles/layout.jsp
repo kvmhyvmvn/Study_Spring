@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:set var="now" value="<%=new java.util.Date()%>"/>
+<c:set var="now" value="<%=new java.util.Date()%>" />
 <!DOCTYPE html>
 <html>
 <c:choose>
@@ -36,10 +36,8 @@
 <link rel="icon" type="image/x-icon"
 	href="<c:url value='/img/hanul.ico' />" />
 <!-- Core theme CSS (includes Bootstrap)-->
-<link href="<c:url value='/css/styles.css?${now }'/>"
-	rel="stylesheet" />
-<link href="<c:url value='/css/common.css?${now }'/>"
-	rel="stylesheet" />
+<link href="<c:url value='/css/styles.css?${now }'/>" rel="stylesheet" />
+<link href="<c:url value='/css/common.css?${now }'/>" rel="stylesheet" />
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 
@@ -95,17 +93,27 @@
 					</button>
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<ul class="navbar-nav ms-auto mt-2 mt-lg-0">
-							<li class="nav-item dropdown"><a
-								class="nav-link dropdown-toggle" id="navbarDropdown" href="#"
-								role="button" data-bs-toggle="dropdown" aria-haspopup="true"
-								aria-expanded="false">Dropdown</a>
-								<div class="dropdown-menu dropdown-menu-end"
-									aria-labelledby="navbarDropdown">
-									<a class="dropdown-item" href="#!">Action</a> <a
-										class="dropdown-item" href="#!">Another action</a>
-									<div class="dropdown-divider"></div>
-									<a class="dropdown-item" href="#!">Something else here</a>
-								</div></li>
+							<!-- 로그인 안 된 경우 -->
+							<c:if test="${empty loginInfo }">
+								<li class="nav-item"><a class="nav-link" href="<c:url value='/member/login'/>">로그인</a></li>
+								<li class="nav-item"><a class="nav-link" href="">회원가입</a></li>
+							</c:if>
+
+							<!-- 로그인 된 경우 -->
+							<c:if test="${not empty loginInfo }">
+								<li class="nav-item dropdown"><a
+									class="nav-link dropdown-toggle" id="navbarDropdown" href="#"
+									role="button" data-bs-toggle="dropdown" aria-haspopup="true"
+									aria-expanded="false">홍길동</a>
+									<div class="dropdown-menu dropdown-menu-end"
+										aria-labelledby="navbarDropdown">
+										<a class="dropdown-item">아이디: hong1234</a> <a
+											class="dropdown-item" href="">My Page</a> <a
+											class="dropdown-item" href="">비밀번호 변경</a>
+										<div class="dropdown-divider"></div>
+										<a class="dropdown-item" href="#!">로그아웃</a>
+									</div></li>
+							</c:if>
 						</ul>
 					</div>
 				</div>

@@ -5,9 +5,13 @@
 	<!-- 신규사원정보 등록 -->
 	<insert id="insert">
 		insert into employees(employee_id, first_name, last_name, email,
-		phone_number, salary, hire_date, department_id, job_id)
+		phone_number, salary, hire_date, job_id, department_id)
 		values(employees_seq.nextval, #{first_name}, #{last_name}, #{email},
-		#{phone_number}, #{salary}, #{hire_date}, #{department_id}, #{job_id}
+		#{phone_number}, #{salary}, #{hire_date}, #{job_id},
+		<choose>
+			<when test="department_id == -1">null</when>
+			<otherwise>#{department_id}</otherwise>
+		</choose>
 		)
 	</insert>
 

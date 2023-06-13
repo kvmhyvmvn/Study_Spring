@@ -14,18 +14,16 @@
 			<colgroup>
 				<col width="180px">
 				<col>
-			</colgroup>		
+			</colgroup>
 			<tr>
 				<th>사원명</th>
 				<td>
 					<div class="row">
 						<div class="col-auto">
-							<input type="text" class="form-control" name="first_name"
-								>
+							<input type="text" placeholder="성" class="form-control" name="first_name">
 						</div>
 						<div class="col-auto">
-							<input type="text" class="form-control" required name="last_name"
-								>
+							<input type="text" placeholder="이름" class="form-control" required name="last_name">
 						</div>
 					</div>
 				</td>
@@ -34,8 +32,7 @@
 				<th>이메일</th>
 				<td>
 					<div class="col-auto">
-						<input type="text" class="form-control" required name="email"
-							>
+						<input type="text" class="form-control" required name="email">
 					</div>
 				</td>
 			</tr>
@@ -43,8 +40,7 @@
 				<th>전화번호</th>
 				<td>
 					<div class="col-auto">
-						<input type="text" class="form-control" name="phone_number"
-							>
+						<input type="text" class="form-control" name="phone_number">
 					</div>
 				</td>
 			</tr>
@@ -61,8 +57,7 @@
 				<td>
 					<div class="row">
 						<div class="col-auto">
-							<input type="text" class="form-control date" name="hire_date"
-								>
+							<input type="text" class="form-control date" required name="hire_date">
 						</div>
 					</div>
 				</td>
@@ -74,7 +69,9 @@
 							<select class="form-select" name="department_id">
 								<option value='-1'>소속없음</option>
 								<c:forEach items="${departments}" var="d">
-									<option ${vo.department_id eq d.department_id ? 'selected' : '' } value='${d.department_id }'>${d.department_name}</option>
+									<option
+										${vo.department_id eq d.department_id ? 'selected' : '' }
+										value='${d.department_id }'>${d.department_name}</option>
 								</c:forEach>
 							</select>
 						</div>
@@ -87,7 +84,8 @@
 						<div class="col-auto">
 							<select class="form-select" name="job_id">
 								<c:forEach items="${jobs}" var="j">
-									<option ${vo.job_id eq j.job_id ? 'selected' : '' } value='${j.job_id }'>${j.job_title}</option>
+									<option ${vo.job_id eq j.job_id ? 'selected' : '' }
+										value='${j.job_id }'>${j.job_title}</option>
 								</c:forEach>
 							</select>
 						</div>
@@ -101,5 +99,12 @@
 				onclick="history.go(-1)">취소</button>
 		</div>
 	</form>
+	
+	<script>
+		$(function(){
+			/* $('[name=hire_date]').val($.datepicker.formatDate('yy-mm-dd', new Date())) */
+			$('[name=hire_date]').val(new Date().toJSON().substr(0,10))
+		})
+	</script>
 </body>
 </html>
