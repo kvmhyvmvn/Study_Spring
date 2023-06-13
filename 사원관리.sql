@@ -88,7 +88,8 @@ select employees_seq.currval from dual;
 
 
 
-
+update employees set salary = 10000;
+rollback;
 
 
 
