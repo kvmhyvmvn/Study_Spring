@@ -42,10 +42,10 @@ public class MemberController {
 			vo.setUserpw(pwEncoder.encode(pw)); // 암호화된 임시 비번
 
 			if (service.member_resetPassword(vo) == 1 && common.sendPassword(vo, pw)) {
-				msg.append("alert('임시 비밀번호가 발급되었습니다. //n이메일을 확인하세요');");
+				msg.append("alert('임시 비밀번호가 발급되었습니다. \\n이메일을 확인하세요');");
 				msg.append("location='login'"); // 임시비번으로 로그인하도록 로그인화면 연결
 			} else {
-				msg.append("alert('임시 비밀번호가 발급 실패ㅠㅠ');");
+				msg.append("alert('임시 비밀번호 발급 실패ㅠㅠ');");
 				msg.append("history.go(-1)");
 			}
 		}
