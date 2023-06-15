@@ -13,12 +13,12 @@ public class CommonUtility {
 
 	private void emailServerConnect(HtmlEmail email) {
 		email.setHostName("smtp.naver.com"); // 메일 서버 지정
-		email.setAuthentication("아이디", "비밀번호"); // 아이디 / 비번으로 로그인
+		email.setAuthentication("gimaaaaam_", "sksmsrlaoals1914"); // 아이디 / 비번으로 로그인
 		email.setSSLOnConnect(true); // 로그인버튼 클릭
 
 	}
 
-	private String EMAIL_ADDRESS = "이메일";
+	private String EMAIL_ADDRESS = "gimaaaaam_@naver.com";
 
 	// 이메일 보내기
 	public boolean sendPassword(MemberVO vo, String pw) {

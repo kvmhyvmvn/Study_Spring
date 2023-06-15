@@ -23,6 +23,14 @@ public class MemberController {
 	private MemberDAO service;
 	@Autowired
 	private BCryptPasswordEncoder pwEncoder;
+	
+	// 비밀번호 변경 화면 요청
+	@RequestMapping("/changepassword")
+	public String change(HttpSession session) {
+		MemberVO vo = (MemberVO)session.getAttribute("loginInfo");
+		if(vo==null) return "redirect:login";
+		else         return "member/change";
+	}
 
 	// 비밀번호 찾기 처리 요청
 	@ResponseBody

@@ -1,0 +1,24 @@
+/**
+ * 회원정보 관련 처리
+ */
+ 
+ var member = {
+	// 태그별로 상태 확인
+	tagStatus: function( tag ){
+		if(tag.is("[name=userpw]"))		return;
+		else if(tag.is("[name=userpw_ck]"))     return;
+	},
+	
+	common: {
+		empty: {is:false, desc:'입력하세요'}
+	},
+	
+	userpwStatus: fuction(pw){
+		
+	},
+	
+	userpwCheckStatus: fuction(pwCk){
+		
+	},
+	
+}
