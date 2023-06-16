@@ -7,6 +7,7 @@
 		update member set userpw = #{userpw} where userid = #{userid}
 	</update>
 	
+	
 	<!-- 해당 아이디와 이메일에 해당하는 회원명 조회 -->
 	<select id="useridEmail" resultType="string">
 		select name from member

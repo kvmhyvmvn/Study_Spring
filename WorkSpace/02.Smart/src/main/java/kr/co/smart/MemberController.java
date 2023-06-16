@@ -24,6 +24,29 @@ public class MemberController {
 	@Autowired
 	private BCryptPasswordEncoder pwEncoder;
 	
+	// 로그아웃 처리 요청
+	@RequestMapping("/logout")
+	public String logout(HttpSession session) {
+		session.removeAttribute("loginInfo");
+		return "redirect:/";
+	}
+	
+	// 새 비밀번호 변경저장 처리 요청
+	@ResponseBody @RequestMapping("/updatepassword")
+	public boolean update(MemberVO vo) {
+		// 화면에서 입력한 새 비밀번호가 DB에 변경 저장
+		vo.setUserpw(pwEncoder.encode(vo.getUserpw()));
+		return service.member_resetPassword(vo)==1 ? true : false;
+	}
+	
+	// 현재 비밀번호 확인 요청
+	@ResponseBody @RequestMapping("/confirmpassword")
+	public int confirm(String userpw, String userid) {
+		// 화면에서 입력한 현재 비밀번호가 DB에 있는지 확인
+		MemberVO vo= service.member_info(userid);
+		return pwEncoder.matches(userpw, vo.getUserpw()) ? 0 : 1;
+	}
+	
 	// 비밀번호 변경 화면 요청
 	@RequestMapping("/changepassword")
 	public String change(HttpSession session) {
