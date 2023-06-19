@@ -22,3 +22,8 @@ select * from member;
 
 delete from member;
 commit;
+
+-- 소셜구분 컬럼 추가
+alter table member add (social varchar2(1));
+-- 소셜 로그인 경우 userpw 정보가 없고 email가 없을수도 있다.
+alter table member modify(userpw null, email null);
