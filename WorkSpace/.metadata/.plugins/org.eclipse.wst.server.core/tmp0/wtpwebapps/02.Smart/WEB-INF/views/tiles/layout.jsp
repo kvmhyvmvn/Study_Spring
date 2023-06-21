@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:set var="now" value="<%=new java.util.Date()%>" />
 <!DOCTYPE html>
 <html>
 <c:choose>
@@ -24,6 +23,9 @@
 	<c:when test="${category eq 'vi'}">
 		<c:set var="title" value="시각화" />
 	</c:when>
+	<c:when test="${category eq 'join'}">
+		<c:set var="title" value="회원가입" />
+	</c:when>
 </c:choose>
 <head>
 <meta charset="utf-8" />
@@ -32,6 +34,7 @@
 <meta name="description" content="" />
 <meta name="author" content="" />
 <title>스마트웹&amp;앱 ${title}</title>
+<c:set var="now" value="<%=new java.util.Date()%>" />
 <!-- Favicon-->
 <link rel="icon" type="image/x-icon"
 	href="<c:url value='/img/hanul.ico' />" />
@@ -97,37 +100,39 @@
 							<c:if test="${empty loginInfo }">
 								<li class="nav-item"><a class="nav-link"
 									href="<c:url value='/member/login'/>">로그인</a></li>
-								<li class="nav-item"><a class="nav-link" href="">회원가입</a></li>
+								<li class="nav-item"><a class="nav-link"
+									href="<c:url value='/member/join'/>">회원가입</a></li>
 							</c:if>
 
-							<!-- 로그인 된 경우 -->
-							<c:if test="${not empty loginInfo }">
-								<li class="nav-item">
-									<c:choose>
-										<c:when test="${empty loginInfo.profile }">
+							<!-- 로그인된 경우 -->
+							<c:if test="${ ! empty loginInfo }">
+
+								<li class="nav-item"><c:choose>
+										<c:when test="${empty loginInfo.profile}">
 											<i class="font-profile fa-regular fa-circle-user"></i>
 										</c:when>
 										<c:otherwise>
 											<img class="profile" src="${loginInfo.profile}">
 										</c:otherwise>
-									</c:choose>
-								</li>
+									</c:choose></li>
+
 								<li class="nav-item dropdown"><a
 									class="nav-link dropdown-toggle" id="navbarDropdown" href="#"
 									role="button" data-bs-toggle="dropdown" aria-haspopup="true"
 									aria-expanded="false">${loginInfo.name }</a>
 									<div class="dropdown-menu dropdown-menu-end"
 										aria-labelledby="navbarDropdown">
-										<c:if test="${loginInfo.social }">
+
+										<c:if test="${ empty loginInfo.social }">
 											<a class="dropdown-item">아이디: ${loginInfo.userid }</a>
 											<a class="dropdown-item" href="">My Page</a>
 											<a class="dropdown-item"
-												href="<c:url value='/member/changepassword'/>">비밀번호 변경</a>
+												href="<c:url value='/member/changePassword' />">비밀번호 변경</a>
 											<div class="dropdown-divider"></div>
 										</c:if>
 
 										<a class="dropdown-item"
-											href="<c:url value='/member/logout'/>">로그아웃</a>
+											href="<c:url value='/member/logout' />">로그아웃</a>
 									</div></li>
 							</c:if>
 						</ul>
@@ -148,6 +153,5 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 	<!-- Core theme JS-->
 	<script src="<c:url value='/js/scripts.js'/>"></script>
-	<!--         <script src="js/scripts.js"></script> -->
 </body>
 </html>
