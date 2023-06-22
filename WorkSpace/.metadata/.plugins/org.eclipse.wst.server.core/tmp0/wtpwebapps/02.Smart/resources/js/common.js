@@ -48,7 +48,17 @@ $(document).on('click', '.date + .date-delete', function(){
 	$(this).css('display', 'none'); // 삭제버튼 안보이게
 	$(this).prev('.date').val(''); // 날짜 태그의 값을 초기화
 })
-
+// 첨부파일 삭제 버튼 클릭
+.on('click', '#file-attach .file-delete', function(){
+	$(this).addClass('d-none'); // 삭제버튼 안 보이게
+		
+	console.log('1> ', $('#file-single').val())
+	$('input[type=file]').val(''); // 첨부되어 있던 이미지파일 없애기
+	var _preview = $('#file-attach .file-preview');
+	if(_preview.length > 0) _preview.empty(); // 미리보기 한 이미지 태그 없애기
+	console.log('1> ', $('#file-single').val())
+})
+	
 // 파일이 이미지파일인지 확인
 function isImage(filename){
 	// abc.png, abc.jpg, abc.txt, abc.hwp, abc.bmp, abc.webp
@@ -71,6 +81,7 @@ $(function() {
 		if(attached) {
 			// 이미지파일인지 확인
 			if(isImage(attached.name)) {
+				singleFile = attached; // 선택한 파일정보를 관리
 				_delete.removeClass('d-none'); // 삭제버튼 보이게
 				// 미리보기 태그가 있을 때만
 				if(_preview.length > 0) {
@@ -84,13 +95,20 @@ $(function() {
 					}
 				}
 			} else {
+				singleFile = ''; // 이미지가 아닌 파일인 경우는 관리정보를 초기화
 				// 이전 선택했던 이미지 파일처리
 				_preview.empty();
 				$(this).val(''); // 실제 file 태그의 정보는 초기화
 				_delete.addClass('d-none'); // 삭제버튼 안보이게
 			}
+		} else {
+			// 파일선택 창에서 취소를 클릭한 경우 : 어떤 처리도 하지 않는다
+			// 파일정보는 관리된 singleFile 변수에 있다.
+			
 		} 
 	})
+	
+	
 	
 	$('.date').change(function(){
 		$(this).next('.date-delete').css('display', 'inline')
