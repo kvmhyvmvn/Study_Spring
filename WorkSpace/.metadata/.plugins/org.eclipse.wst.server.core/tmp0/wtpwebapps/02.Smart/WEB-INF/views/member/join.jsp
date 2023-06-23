@@ -13,7 +13,7 @@
 <body>
 	<h3 class="my-4">회원가입</h3>
 	<div class="text-danger mb-2">*는 필수입력항목입니다.</div>
-	<form method="post" action="register">
+	<form method="post" action="register" enctype="multipart/form-data">
 	<!-- 파일전송시 규칙
 	1. method는 post이어야 한다
 	2. enctype="multipart/form-data"
@@ -178,6 +178,7 @@
 	<script>
 	// 회원가입 버튼 클릭시
 	$('#btn-join').on('click', function(){
+	
 		if($("[name=name]").val().trim() == "") {
 			alert("회원명을 입력하세요!");
 			$("[name=name]").focus();
@@ -209,8 +210,19 @@
 		if(invalidStatus($("[name=userpw_ck]"))) return;
 		if(invalidStatus($("[name=email]"))) return;
 		
+		singleFileUpload();
 		$('form').submit()
 	})
+	
+	function singleFileUpload(){
+		if(singleFile != ""){
+			var transfer = new DataTransfer();
+			transfer.items.add(singleFile);
+			// 화면 태그 속성 : attr : 기본에 해당, 나중에 속성 추가 지정 : prop
+			$('input[type=file]').prop('files', transfer.files);
+			console.log($('input[type=file]').val())
+		}
+	}
 	
 	// 체크항목에 입력을 유효하게 했는지 확인
 	function invalidStatus(tag) {

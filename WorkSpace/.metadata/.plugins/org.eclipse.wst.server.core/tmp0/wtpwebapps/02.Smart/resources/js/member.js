@@ -13,7 +13,7 @@ var member = {
 	
 	// 이메일 입력 상태 확인 : 영문소문자나 숫자만
 	emailStatus : function(email) { // abc@hanul.co.kr abc@hanul.com, net, ...
-		var reg = /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/;
+		var reg = /^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/i;
 		if(email=="") return this.common.empty;
 		else if(reg.test(email)) return this.email.valid;
 		else                     return this.email.invalid;
