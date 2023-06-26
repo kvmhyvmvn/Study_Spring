@@ -1,0 +1,42 @@
+package smart.notice;
+
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+
+public class NoticeDAO implements NoticeService {
+	@Autowired @Qualifier("hanul") private SqlSession sql;
+
+	@Override
+	public int notice_regist(NoticeVO vo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public List<NoticeVO> notice_list() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public NoticeVO notice_info(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void notice_update(NoticeVO vo) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public int notice_delete(int id) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}

@@ -91,8 +91,25 @@ select employees_seq.currval from dual;
 update employees set salary = 10000;
 rollback;
 
+-- rownum : 존재하지 않지만, 마치 존재하는 것처럼 사용할 수 있는 가짜컬럼(psedo column)
+select rownum, employee_id, salary from employees
+order by 1;
 
+-- 우리회사 사원들에 대해 급여가 높은 사원순으로 조회
+select rownum, e.* from
+(select rownum, employee_id, salary from employees
+where salary is not null
+order by salary desc) e;
 
+-- 우리회사 사원들에 대해 급여 순위 조회
+select rank() over(order by salary desc) rank, employee_id, salary
+from employees
+where salary is not null;
+
+-- 순서
+select row_number() over(order by salary desc) no, employee_id, salary
+from employees
+where salary is not null;
 
 
 

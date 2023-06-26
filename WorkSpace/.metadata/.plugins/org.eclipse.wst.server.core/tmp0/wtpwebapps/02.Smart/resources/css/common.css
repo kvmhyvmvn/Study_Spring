@@ -4,7 +4,7 @@ a {
 	color: initial
 }
 
-a:link, a:hover {
+a:not(.btn):link, a:not(.btn):hover {
 	text-decoration: none;
 	color: inherit;
 }
@@ -36,6 +36,8 @@ a.text-link:hover {color : #0d6efd; text-decoration: underline; }
 
 input[type=file] {display : none} /* 기본 파일태그는 안보이게 */
 .file-preview img {max-height: 38px; }
+
+textarea.form-control {height : 400px; resize: none; }
 
 .w-px100 {width: 100px; }
 .w-px90 {width: 90px; }

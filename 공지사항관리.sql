@@ -43,3 +43,34 @@ select * from notice;
 select * from member;
 
 commit;
+
+select name, userid, admin from member;
+
+update notice set writer = 'admin' where id = 1;
+
+update notice
+set writer = case when id=1 then 'admin1' when id = 2 then 'admin2' end;
+
+select* from notice order by 1;
+insert into notice(title, content, writer)
+select title, content, writer from notice;
+
+-- 데이터 행을 조회 해온 순서에 해당하는 컬럼 : rownum
+select rownum, n.* from
+(select n.*, name
+from notice n inner join member m on n.writer = m.userid
+order  by id) n
+;
+
+select row_number() over(order by id) no, n.*, name
+from notice n inner join member m on n.writer = m.userid
+order by no desc
+;
+
+delete from notice where mod(id, 5) = 0;
+commit;
+
+
+
+
+

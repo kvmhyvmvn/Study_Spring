@@ -1,0 +1,9 @@
+package smart.notice;
+
+import java.util.Date;
+
+public class NoticeVO {
+	private int id;
+	private String title, content, writer;
+	private Date writerdate;
+}
