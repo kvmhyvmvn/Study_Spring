@@ -2,26 +2,48 @@ package smart.common;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.mail.EmailAttachment;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
 import org.springframework.stereotype.Service;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import smart.member.MemberVO;
 
 @Service
 public class CommonUtility {
+	
+	// 파일 다운로드
+	public void fileDownload(String filename, String filepath, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// filepath : http://localhost:8080/smart/upload/profile/2023/06/22/abc.png
+		filepath = filepath.replace(appURL(request), "d://app/" + request.getContextPath());
+		// 다운로드 할 파일객체 생성
+		File file = new File(filepath);
+		String mime = request.getSession().getServletContext().getMimeType(filename);
+		response.setContentType(mime);
+		
+		// 파일 IO : 읽기 / 쓰기 - 단위 문자 : reader / writer, 단 byte: input / output 
+		
+		// 파일을 첨부해서 쓰기작업하기
+		URLEncoder.encode(filename, "utf-8").replaceAll("\\+", "%20");
+		response.setHeader("content-disposition", "attachment; filename=" + filename);
+		FileCopyUtils.copy(new FileInputStream(file), response.getOutputStream());
+	}
 	
 	// 파일업로드
 	public String fileUpload(String category, MultipartFile file, HttpServletRequest request) {

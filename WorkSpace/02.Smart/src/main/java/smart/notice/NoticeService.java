@@ -8,5 +8,6 @@ public interface NoticeService {
 	List<NoticeVO> notice_list(); // 공지글 목록 조회
 	NoticeVO notice_info(int id); // 공지글 정보 조회
 	void notice_update(NoticeVO vo); // 공지글 정보 수정, 저장
+	int notice_read(int id); // 공지글 조회수 증가처리
 	int notice_delete(int id); // 공지글 삭제
 }
