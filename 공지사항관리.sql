@@ -70,6 +70,16 @@ order by no desc
 delete from notice where mod(id, 5) = 0;
 commit;
 
+select count(*) from notice;
+
+
+select *
+from (select row_number() over(order by id) no, n.*, name
+from notice n inner join member m on n.writer = m.userid) n
+where no between 395 and 404
+order by no desc
+;
+
 
 
 
