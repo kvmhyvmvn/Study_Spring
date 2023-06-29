@@ -8,9 +8,24 @@ writedate     date default sysdate /* 작성일자 */,
 readcnt       number default 0 /*조회수*/,
 filename      varchar2(300)/*첨부파일명*/,
 filepath      varchar2(600)/*첨부파일경로*/,
+root          number /* 답글 관리를 위한 id */,
+step          number default 0/* 글 순서 */,
+indent        number default 0/* 들여쓰기 */,
 constraint notice_writer_fk foreign key(writer)
                        references member(userid)  on delete cascade
 );
+
+alter table notice add (
+root          number /* 답글 관리를 위한 id */,
+step          number default 0/* 글 순서 */,
+indent        number default 0/* 들여쓰기 */
+);
+
+select id, root, step, indent from notice
+order by id desc;
+
+update notice set root = id;
+commit;
 
 -- 작성자 id : hong
 -- 탈퇴하면 member에는 회원이 없다. - 
@@ -24,11 +39,19 @@ create sequence seq_notice
 start with 1 increment by 1 nocache;
 
 -- notice 의 PK인 id에 시퀀스를 자동 적용시킬 트리거 생성
-create trigger trg_notice
+create or replace trigger trg_notice
     before insert on notice
     for each row
 begin
     select seq_notice.nextval into :new.id from dual;
+    if ( :new.root is null) then
+        /* 원글인 경우 root에 값을 넣기 위한 처리 */
+        select seq_notice.currval into :new.root from dual;
+    else
+        /* 답글인 경우 순서를 위한 step 변경 처리 */
+        update notice set step = step + 1
+        where root = :old.root and step > :old.step;
+    end if;
 end;
 /
 

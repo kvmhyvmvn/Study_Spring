@@ -49,14 +49,20 @@
 			<td>${vo.filename }</td>
 		</tr>
 	</table>
+	<c:set var="params" value="curPage=${page.curPage}&search=${page.search}&keyword=${page.keyword }"/>
 	<div class="btn-toolbar gap-2 my-3 justify-content-center">
-		<a class="btn btn-primary" href="list">공지글목록</a>
+		<a class="btn btn-primary" href="list?${params}">공지글목록</a>
 		<!-- 관리자로 로그인 한 경우만 수정/삭제 가능  -->
 		<c:if test="${loginInfo.admin eq 'Y' }">
-		<a class="btn btn-primary" href="modify?id=${vo.id }">공지글수정</a>
-		<a class="btn btn-primary" href="javascript:if(confirm('이 공지글을 삭제?')) {location='delete?id=${vo.id }'}">공지글삭제</a>
+		<a class="btn btn-primary" href="modify?id=${vo.id }&${params}">공지글수정</a>
+		<a class="btn btn-primary" href="javascript:if(confirm('이 공지글을 삭제?')) {location='delete?id=${vo.id }&${params}'}">공지글삭제</a>
+		</c:if>
+		<!-- 로그인 한 경우만 답글쓰기 가능 -->
+		<c:if test="${not empty loginInfo}">
+		<a class="btn btn-primary" href="reply?id=${vo.id}&${params}">답글쓰기</a>
 		</c:if>
 	</div>
+	
 	<jsp:include page="/WEB-INF/views/include/modal_image.jsp"/>
 	<script>
 		// 폰트어썸으로 만들어진 버튼의 경우 동적으로 다시 만들어지므로
