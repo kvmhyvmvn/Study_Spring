@@ -1,0 +1,6 @@
+package smart.board;
+
+public class FileVO {
+	private int id;
+	private String filename, filepath;
+}

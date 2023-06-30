@@ -1,0 +1,8 @@
+package smart.board;
+
+public class BoardVO {
+	private int id;
+	private String title, content, writer, name;
+	private Date writedate;
+
+}

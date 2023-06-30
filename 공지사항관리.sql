@@ -103,6 +103,19 @@ where no between 395 and 404
 order by no desc
 ;
 
+create or replace trigger trg_notice
+    before insert on notice
+    for each row
+begin
+    select seq_notice.nextval into :new.id from dual;
+    if ( :new.root is null) then
+        /* 원글인 경우 root에 값을 넣기 위한 처리 */
+        select seq_notice.currval into :new.root from dual;
+    end if;
+end;
+
+
+
 
 
 

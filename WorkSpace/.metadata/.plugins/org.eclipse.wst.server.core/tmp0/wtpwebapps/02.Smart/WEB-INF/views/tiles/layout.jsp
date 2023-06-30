@@ -72,7 +72,7 @@
 					class="${category eq 'hr' ? 'active':''} list-group-item list-group-item-action list-group-item-light p-3">사원관리</a>
 				<a href="<c:url value='/notice/list'/>"
 					class="${category eq 'no' ? 'active':''} list-group-item list-group-item-action list-group-item-light p-3">공지사항</a>
-				<a href=""
+				<a href="<c:url value='/board/list'/>"
 					class="${category eq 'bo' ? 'active':''} list-group-item list-group-item-action list-group-item-light p-3">방명록</a>
 				<a href=""
 					class="${category eq 'da' ? 'active':''} list-group-item list-group-item-action list-group-item-light p-3">공공데이터</a>

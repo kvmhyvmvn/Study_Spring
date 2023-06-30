@@ -1,0 +1,10 @@
+package smart.board;
+
+import java.sql.Date;
+
+public class BoardVO {
+	private int id, readcnt, no;
+	private String title, content, writer, name;
+	private Date writedate;
+
+}
