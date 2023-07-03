@@ -111,8 +111,25 @@ begin
     if ( :new.root is null) then
         /* 원글인 경우 root에 값을 넣기 위한 처리 */
         select seq_notice.currval into :new.root from dual;
+    else
+        update notice set step = step + 1
+        where root = :new.root and step >= :new.step;
     end if;
 end;
+/
+
+-- 원글 삭제시 답글들 삭제처리
+create or replace trigger trg_notice_delete
+    after delete on notice
+    for each row
+begin
+    -- 삭제한 글의 root와 같은 root인 데이터행을 삭제
+    delete from notice where root = :old.root;
+end;
+/
+
+
+alter trigger trg_notice_delete disable; -- disable / enable
 
 
 

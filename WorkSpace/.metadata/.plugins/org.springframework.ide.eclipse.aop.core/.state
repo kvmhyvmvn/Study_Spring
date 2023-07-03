@@ -3,4 +3,5 @@
 <aop-project name="01.Web"/>
 <aop-project name="99.Test"/>
 <aop-project name="02.Smart"/>
+<aop-project name="Middle"/>
 </aop-reference-model>

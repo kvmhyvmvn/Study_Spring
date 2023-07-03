@@ -36,6 +36,7 @@
 					</div> <!-- 마우스 드래그 드랍으로 파일첨부 처리되게 -->
 					<div class="form-control mt-2 py-2 file-drag">
 						<div class="text-center py-3">첨부할 파일을 마우스로 끌어 오세요</div>
+
 					</div>
 				</td>
 			</tr>
@@ -47,12 +48,13 @@
 		<button class="btn btn-outline-primary px-4" onclick="history.go(-1)">취소</button>
 	</div>
 	<script>
-	var fileList = new FileList();
-	
-		$('body *').on('drop', function(e) {
-			e.preventDefault();
-		})
-
+		var fileList = new FileList();
+		
+		// 백틱 사용하기 : ``
+		var name = "홍길동";
+		console.log("이름은 " + name + " 입니다")
+		console.log(`이름은 \${name} 입니다`)
+		
 		/*  
 		$('.file-drag')
 		.on( 'dragover dragleave drop', function(e){
@@ -65,31 +67,9 @@
 		})
 		 */
 
-		$('.file-drag').on({
-			'dragover dragleave drop' : function(e) {
-				e.preventDefault();
-				//드래그오버시 입력태그에 커서가 있을때처럼 보여지게
-				if (e.type == 'dragover')
-					$(this).addClass('drag-over')
-				else
-					$(this).removeClass('drag-over')
-			},
-			'drop' : function(e) {
-				console.log(e.originalEvent.dataTransfer.files)
-				var files = e.originalEvent.dataTransfer.files;
-				for(var i=0; i<files.length; i++) {
-					// 폴더는 담지않는다
-					if(files[i].type == "") {
-						alert("폴더는 첨부할 수 없습니다.")
-					}else {
-						fileList.setFile(files[i]);
-					}
-				}
-			}
-		})
-
 		$('#btn-save').click(function() {
 			if (emptyCheck()) {
+				multipleFileUpload();
 				$('form').submit()
 			}
 		})

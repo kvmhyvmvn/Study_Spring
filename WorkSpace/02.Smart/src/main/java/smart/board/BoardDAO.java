@@ -12,15 +12,22 @@ public class BoardDAO implements BoardService {
 	@Autowired @Qualifier("hanul") private SqlSession sql;
 
 	@Override
-	public int board_register() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int board_register(BoardVO vo) {
+		// 방명록 정보 저장 + 첨부파일정보
+		int insert = sql.insert("board.register", vo);
+		if(insert==1 && vo.getFileList() != null) {
+			sql.insert("board.fileRegister", vo);
+		}
+		return insert;
 	}
 
 	@Override
 	public PageVO board_list(PageVO page) {
-		// TODO Auto-generated method stub
-		return null;
+		// 건수 조회
+		page.setTotalList(sql.selectOne("board.totalList", page));
+		// 해당 페이지의 목록( 기본 10건 )
+		page.setList(sql.selectList("board.list", page));
+		return page;
 	}
 
 	@Override
