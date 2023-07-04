@@ -22,10 +22,12 @@
 		</c:forEach>
 		<!-- 다음 블럭 -->
 		<c:if test="${page.curBlock < page.totalBlock }">
-			<li class="page-item"><a class="page-link" onclick="page(${page.endPage+1})">
-			<i class="fa-solid fa-angle-right"></i></a></li>
-			<li class="page-item"><a class="page-link" onclick="page(${page.totalPage})">
-			<i class="fa-solid fa-angles-right"></i></a></li>
+			<li class="page-item"> <!-- 다음 -->
+				<a class="page-link" onclick="page(${page.endPage+1})"><i class="fa-solid fa-angle-right"></i></a>
+			</li>
+			<li class="page-item"> <!-- 마지막 -->
+				<a class="page-link" onclick="page(${page.totalPage})"><i class="fa-solid fa-angles-right"></i></a>
+			</li>
 		</c:if>
 	</ul>
 </nav>
