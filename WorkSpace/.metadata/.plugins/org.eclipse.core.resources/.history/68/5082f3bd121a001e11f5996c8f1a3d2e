@@ -1,0 +1,9 @@
+package middle.cus;
+
+import java.util.List;
+
+import smart.customer.CustomerVO;
+
+public interface CustomerService {
+	List<CustomerVO> customer_list(int name);
+}

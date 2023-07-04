@@ -1,0 +1,9 @@
+package middle.cus;
+
+import java.util.List;
+
+
+public interface CustomerService {
+	
+	CustomerVO info(int id);
+}
