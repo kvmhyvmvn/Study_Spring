@@ -1,0 +1,21 @@
+웹 브라우저 url 요청
+-> Controller
+-> Service
+-> DAO
+-> mapper
+
+서블릿에서
+Controller
+
+<--
+
+비즈니스 로직 : 처리를 실행 : interface - execute(request, response)
+interface를 구현하는 구체화된 메소드를 갖는 클래스 : action / command
+ListAction
+InfoCommand
+InsertCommand
+UpdateAction
+
+-->
+
+DAO(DataAccess Object) - DTO 객체에 데이터를 담기
