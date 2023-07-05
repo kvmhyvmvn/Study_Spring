@@ -11,8 +11,13 @@ filepath      varchar2(600)/*첨부파일경로*/,
 root          number /* 답글 관리를 위한 id */,
 step          number default 0/* 글 순서 */,
 indent        number default 0/* 들여쓰기 */,
+rid           number constraint notice_rid_fk references notice(id) on delete cascade,
 constraint notice_writer_fk foreign key(writer)
                        references member(userid)  on delete cascade
+);
+
+alter table notice add (
+rid           number constraint notice_rid_fk references notice(id) on delete cascade
 );
 
 alter table notice add (
@@ -103,6 +108,7 @@ where no between 395 and 404
 order by no desc
 ;
 
+-- notice의 PK인 id 에 시퀀스를 자동 적용시킬 트리거 생성
 create or replace trigger trg_notice
     before insert on notice
     for each row
@@ -130,6 +136,10 @@ end;
 
 
 alter trigger trg_notice_delete disable; -- disable / enable
+
+desc notice;
+
+select * from notice;
 
 
 

@@ -1,13 +1,9 @@
 package com.hanul.middle;
 
-import java.io.IOException;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
@@ -18,28 +14,56 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.gson.Gson;
+
+import customer.CustomerVO;
 
 @RestController
 public class HomeController {
-	// RestAPI : Page가 필요할때의 요청이 아니라 데이터가 필요할때 파라메터를 주고 데이터를 요청함.
-	// 대부분 json이나 xml 형태로 데이터를 return 해준다.
-	// json { "key" : "value" }
+	// 어노테이션 == 주석 ?
+	// @영어 <= 어노테이션 == 기계가 해석하는 주석. (Tag)
+	// @, Ctrl + SpaceBar 누르면 나오는 모든 것들은 어노테이션이다. 어노테이션은 밑에 있는 메소드나 또는 변수, 객체등의
+	// 역할을 정해주는 기능을 담당한다.
+	// class (어떤 요청을 받기 위한 객체가 아님)
+	// @Controller class ( 어떤 요청을 받는 객체 ==> 컴퓨터 인식(Spring)) org.spring...어노테이션 종류
 	
-	//             V     =>     M     =>     C
-	// 요청 => Controller => Database조회(Model) => View(Web)
-	// Android화면 => 요청(Controller) => Model => Android 화면
-	
-	// dto, list 조회 <= customer
-	@Autowired @Qualifier("hanul") SqlSession sql;
+	// json / xml
+	// json <= String으로 되어있는데 key와 value가 존재하고 list같은 자료구조도 [] 등으로 표현이 가능한 데이터 타입
+	// 요소 하나 (Object, DTO) ==> 기호{}, List ==> [] , 
+	// [ {vo} ... {vo.lastindex} ]
 
-	@ResponseBody
-	@RequestMapping(value = "/")
-	public String home() throws IOException { 
-		return "aaa";
-		// 응답을 하고나서 다시 응답을 하는것은 오류라고 인식. (response가 응답을 이미 처리함)
+	@Autowired
+	@Qualifier("hanul")
+	SqlSession sql;
+	
+	// Consumes
+
+	@RequestMapping(value = "/list.cu", produces = "text/html;charset=utf-8")
+	public String list() {
+		System.out.println("여기까지 다녀감");
+		List<CustomerVO> list = sql.selectList("cu.list");
+		Gson gson = new Gson();
+		// Object(List, DTO등) ==> String json으로 바꾸는 메소드 : toJson 메소드
+		return gson.toJson(list);
 	}
 	
+	
+	@RequestMapping(value = "/obj.cu", produces = "text/html;charset=utf-8")
+	public String obj() {
+		CustomerVO vo = new CustomerVO();
+		vo.setEmail("email");
+		vo.setName("이름이름");
+		return new Gson().toJson(vo);
+	}
+
+//	@Autowired TestBean bean1;
+//	TestBean bean2;
+//	
+//	@RequestMapping("/test.bean")
+//	public void test() {
+//		System.out.println(bean1); // com.hanul.middle.TestBean@7d07c5f1
+//		System.out.println(bean2); // null
+//	}
 }

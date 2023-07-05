@@ -15,7 +15,6 @@
 		<property name="password" value="${hanul.password}"/>
 	</bean>
 	
-	
 	<bean id="factoryHanul" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dbcpHanul"/>
 		<property name="mapperLocations" value="classpath:sqlmap/*-mapper.xml"/>
@@ -26,5 +25,5 @@
 		<constructor-arg index="0" ref="factoryHanul"/>
 		<qualifier value="hanul"/>
 	</bean>
-	
+
 </beans>
