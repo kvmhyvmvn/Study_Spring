@@ -53,17 +53,25 @@
 			</tr>
 		</table>
 		<input type="hidden" name="writer" value="${loginInfo.userid }">
+		<input type="hidden" name="curPage" value="${page.curPage }">
+		<input type="hidden" name="search" value="${page.search }">
+		<input type="hidden" name="keyword" value="${page.keyword }">
+		<input type="hidden" name="viewType" value="${page.viewType }">
+		<input type="hidden" name="pageList" value="${page.pageList }">
+		<input type="hidden" name="id" value="${vo.id }">
+		<!-- 삭제한 첨부파일id 목록 -->
+		<input type="hidden" name="removed">
 	</form>
 	<div class="btn-toolbar gap-2 my-3 justify-content-center">
 		<button class="btn btn-primary px-4" id="btn-save">저장</button>
-		<button class="btn btn-outline-primary px-4" onclick="btn-cancel">취소</button>
+		<button class="btn btn-outline-primary px-4" id="btn-cancel">취소</button>
 	</div>
 
 	<script>
 		var fileList = new FileList();
 		
 		<c:forEach items="${vo.fileList }" var="f">
-			fileList.setFile(urlToFile("${f.filepath}", "${f.filename}"))
+			fileList.setFile(urlToFile("${f.filepath}", "${f.filename}"), ${f.id})
 		</c:forEach>
 		console.log(fileList)
 		
@@ -77,14 +85,19 @@
 				async: false,
 			}).done(function(response){
 				var blob = new Blob([response]);
-				var file = new File([blob], filename)
+				file = new File([blob], filename)
 			})
 			return file;
 		}
+		
+		$('#btn-cancel').click(function() {
+			$('form').attr('action', 'info').submit()
+		})		
 
 		$('#btn-save').click(function() {
 			if (emptyCheck()) {
 				multipleFileUpload();
+				$('[name=removed]').val(fileList.info.removeId)
 				$('form').submit()
 			}
 		})

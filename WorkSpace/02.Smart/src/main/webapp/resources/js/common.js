@@ -29,12 +29,24 @@
 // 파일 관리 객체 생성자함수
 function FileList() {
 	this.files = [];
-	this.setFile = function(file) {
+	this.info = {upload:[], fileId:[], removeId:[]}; // 업로드여부, 업로드 된 파일 id, 삭제할 파일 id
+	// 이미 업로드 된 파일 : 처리할 게 없음
+	// 새로 추가첨부한 파일 : upload 해야 함
+	// 이미 업로드 되어있던 파일 삭제 : DB + 물리적인 파일 삭제
+	// new Object == {}, new Array() == []
+	
+	this.setFile = function(file, id) {
 		// 선택한 파일마다 alert이 뜬다
 		/*if (file.size > 1024 * 1024 * 10) {
 			alert("10MB 이상의 파일은 첨부할 수 없습니다")
 			return;
 		}*/
+		// 두번째 파라미터 id가 있으면 업로드 안함(false)
+		// 드래그드랍 또는 파일태그로 선택 하는 경우 업로드 해야 함(true)
+		this.info.upload.push(typeof id == "undefined" ? true : false); // true : 업로드 해야 함, false : 업로드 안함
+		// 두번째 파라미터 id가 O : fileId 에 담기
+		if(typeof id != "undefined") this.info.fileId.push(id);
+		
 		this.files.push(file);
 	}
 	this.getFile = function() {
@@ -42,6 +54,14 @@ function FileList() {
 	}
 	this.removeFile = function(i) {
 		this.files.splice(i, 1); // 선택한 것부터 1개만 없앤다.
+		// 업로드여부 삭제
+		this.info.upload.splice(i, 1);
+		
+		// 이미 업로드 되어 있는 파일을 삭제한 경우 삭제할 파일id에 담기
+		if(typeof this.info.fileId[i] != "undefined") {
+			this.info.removeId.push(this.info.fileId[i]); // 삭제대상 파일 id 추가
+			this.info.fileId.splice(i, 1); // 파일 id 목록에서도 삭제
+		}
 	}
 
 	this.showFile = function() {
@@ -59,6 +79,7 @@ function FileList() {
 			tag = '<div class="text-center py-3">첨부할 파일을 마우스로 끌어 오세요</div>';
 		}
 		$('.file-drag').html(tag);
+		console.log('최종fileList', fileList)
 	}
 
 }
@@ -295,6 +316,8 @@ function multipleFileUpload() {
 	var files = fileList.getFile();
 	if(files.length > 0 ) {
 		for(var i=0; i<files.length; i++) {
+			// 업로드 해야하는 파일들만(true) 추가
+			if(fileList.info.upload[i])
 			transfer.items.add(files[i])
 		}
 	}

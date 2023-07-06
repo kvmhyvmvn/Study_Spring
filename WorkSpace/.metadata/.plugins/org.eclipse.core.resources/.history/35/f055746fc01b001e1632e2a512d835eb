@@ -1,0 +1,28 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<table>
+		<tr>
+			<th>상품명</th>
+			<th>ê°ê²©</th>
+		</tr>
+		<tr>
+			<th>커피</th>
+			<th>1000</th>
+		</tr>
+		<tr>
+			<th>콜라</th>
+			<th>1200</th>
+		</tr>
+		<tr>
+			<th>우유</th>
+			<th>1500</th>
+		</tr>
+	</table>
+</body>
+</html>

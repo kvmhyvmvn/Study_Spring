@@ -27,4 +27,17 @@ public class HomeController {
 		return "home";
 	}
 	
+	@RequestMapping("/test")
+	public String test1(String name, int price, Model model) {
+		model.addAttribute("name", name);
+		model.addAttribute("price", price);
+		return "ajax/ex/test";
+	}
+	
+	@RequestMapping("/xml")
+	public String test() {
+		
+		return "ajax/ex/drink";
+	}
+	
 }
