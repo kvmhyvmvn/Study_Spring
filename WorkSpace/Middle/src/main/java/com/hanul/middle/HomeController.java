@@ -2,6 +2,7 @@ package com.hanul.middle;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -41,8 +42,8 @@ public class HomeController {
 	// Consumes
 
 	@RequestMapping(value = "/list.cu", produces = "text/html;charset=utf-8")
-	public String list() {
-		System.out.println("여기까지 다녀감");
+	public String list(String param) {
+		System.out.println("여기까지 다녀감 누군가가" + param);
 		List<CustomerVO> list = sql.selectList("cu.list");
 		Gson gson = new Gson();
 		// Object(List, DTO등) ==> String json으로 바꾸는 메소드 : toJson 메소드

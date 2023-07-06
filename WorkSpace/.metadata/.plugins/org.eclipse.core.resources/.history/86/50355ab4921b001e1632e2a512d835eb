@@ -1,0 +1,13 @@
+package com.hanul.exam;
+
+import org.springframework.stereotype.Controller;
+
+@Controller
+public class NoticeController {
+	
+	public String title() {
+		
+		
+		return "title";
+	}
+}
