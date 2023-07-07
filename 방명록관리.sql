@@ -50,5 +50,29 @@ from (select row_number() over(order by id) no, b.*, name
 order by no desc
 ;
 
+-- 방명록 글에 대한 댓글 관리
+create table board_comment(
+id        number constraint board_comment_id_pk primary key,
+content   varchar2(1000) not null, /* 댓글 내용 */
+writer    varchar2(50) not null, /* 글쓴이 아이디 */
+writedate date default sysdate, /* 작성 일자 */
+board_id  number, /* 방명록 글의 PK인 id */
+constraint board_comment_writer_fk foreign key(writer)
+                references member(userid) on delete cascade,
+constraint board_comment_board_id_fk foreign key(board_id)
+            references board(id) on delete cascade
+);
+
+create sequence seq_board_comment start with 1 increment by 1 nocache;
+
+create or replace trigger trg_board_comment
+    before insert on board_comment
+    for each row
+begin
+    select seq_board_comment.nextval into :new.id from dual;
+end;
+
+
+
 
 
