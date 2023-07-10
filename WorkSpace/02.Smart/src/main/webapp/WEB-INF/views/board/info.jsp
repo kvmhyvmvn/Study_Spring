@@ -53,6 +53,7 @@
 		<a class="btn btn-primary" id="btn-modify">방명록수정</a>
 		<a class="btn btn-primary" id="btn-delete">방명록삭제</a>
 	</div>
+	
 	<!-- 댓글입력부분 -->
 	<div class="row justify-content-center" id="comment-register">
 		<div class="col-md-10 content">
@@ -69,6 +70,11 @@
 		</div>
 	</div>
 	
+	<!-- 댓글목록출력부분 -->
+	<div class="row justify-content-center mt-4" id="comment-list">
+		
+	</div>
+	
 	<form method="post">
 		<input type="hidden" name="file">
 		<input type="hidden" name="curPage" value="${page.curPage }">
@@ -83,9 +89,21 @@
 	<jsp:include page="/WEB-INF/views/include/modal_alert.jsp" />
 
 	<script>
+	commentList();
+	
+	// 댓글목록조회,출력
+	function commentList() {
+		$.ajax({
+			url: '<c:url value="/board/comment/list/${vo.id}"/>'
+		}).done(function(response){
+			console.log(response)
+			$('#comment-list').html(response)
+		})
+	}
+	
 	// 댓글등록처리
 	$('.btn-register').click(function(){
-		// 입력한 글이 있을때만
+		// 입력한 글이 있을때만 처리
 		var _textarea = $('#comment-register textarea');
 		if(_textarea.val().length == 0) return;
 		$.ajax({
@@ -93,6 +111,13 @@
 			data: {board_id: ${vo.id}, content: _textarea.val(), writer: '${loginInfo.userid}'},
 		}).done(function(response){
 			console.log(response)
+			if(response) {
+				alert("댓글이 등록되었습니다.");
+				initRegisterContent();
+				commentList();
+			} else {
+				alert("댓글등록을 실패했습니다.");
+			}
 		});
 	})
 	
@@ -132,10 +157,12 @@
 	$(document).on('focusout', '#comment-register textarea', function(){
 		// 입력이 되어 있지 않은 경우 초기화하기
 		$(this).val($(this).val().trim());
+		
 		if($(this).val()==""){
 			initRegisterContent();
 		}
-	}).on('keyup', '#comment-register textarea', function(){
+		
+	}).on('keyup', '.comment textarea', function(){
 		var comment = $(this).val();
 		if(comment.length > 200) {
 			alert("최대 200자까지 입력할 수 있습니다");

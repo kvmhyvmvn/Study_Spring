@@ -12,13 +12,18 @@
 		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕"/>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="/login"/>
+		<item key="selection" value=""/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="alert"/>
+			<item value="utf"/>
+			<item value="profile"/>
+			<item value="pro"/>
+			<item value="comment"/>
 			<item value="/login"/>
 			<item value="fileid"/>
 			<item value="fild"/>
@@ -29,11 +34,6 @@
 			<item value="drop"/>
 			<item value="form-control"/>
 			<item value="page-item"/>
-			<item value="pagination"/>
-			<item value="파일명"/>
-			<item value="token"/>
-			<item value="1.6"/>
-			<item value=""/>
 		</list>
 		<list key="replacehistory">
 		</list>

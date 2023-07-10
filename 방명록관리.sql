@@ -71,7 +71,9 @@ create or replace trigger trg_board_comment
 begin
     select seq_board_comment.nextval into :new.id from dual;
 end;
+/
 
+select * from board_comment;
 
 
 
