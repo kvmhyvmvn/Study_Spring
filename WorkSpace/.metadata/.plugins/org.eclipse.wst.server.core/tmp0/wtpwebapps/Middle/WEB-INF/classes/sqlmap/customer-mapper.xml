@@ -5,9 +5,5 @@
 <select id="list" resultType="customer.CustomerVO">
 	select * from customer
 </select>
-
-<select id="one" resultType="customer.CustomerVO">
-	select * from customer where id = #{id}
-</select>
 	
 </mapper>
