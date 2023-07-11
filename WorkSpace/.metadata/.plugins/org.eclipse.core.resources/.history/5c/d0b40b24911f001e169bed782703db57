@@ -1,0 +1,20 @@
+package andmember;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.google.gson.Gson;
+
+public class AndMemberDAO {
+
+	@Qualifier("hanul")
+	SqlSession sql;
+	
+	public String login() {
+		String one = sql.selectOne("and.login");
+		Gson gson = new Gson();
+		return gson.toJson(one);
+	}
+}

@@ -1,0 +1,11 @@
+package andmember;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+
+public class AndMemberDAO {
+
+	@RequestMapping(value = "/login", produces = "text/html;charset=utf-8")
+	public String login(String id, String pw) {
+		return "";
+	}
+}

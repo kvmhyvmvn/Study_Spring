@@ -1,0 +1,23 @@
+package com.hanul.middle;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.google.gson.Gson;
+
+@RestController @RequestMapping("/member")
+public class AndMemberController {
+	
+	@Autowired @Qualifier("hanul")
+	SqlSession sql;
+	
+	public String login() {
+		
+		Gson gson = new Gson();
+		return "";
+	}
+
+}

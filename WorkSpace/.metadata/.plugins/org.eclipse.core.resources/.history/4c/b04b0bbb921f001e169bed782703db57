@@ -1,0 +1,21 @@
+package com.hanul.middle;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import andmember.AndMemberDAO;
+
+@RestController @RequestMapping("/and")
+public class AndMemberController {
+	
+	@Autowired AndMemberDAO dao;
+	
+	@RequestMapping(value = "/login", produces = "text/html;charset=utf-8")
+	public void login() {
+		dao.login();
+	}
+	
+	
+
+}
