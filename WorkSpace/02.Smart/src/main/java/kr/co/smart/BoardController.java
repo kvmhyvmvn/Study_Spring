@@ -1,5 +1,6 @@
 package kr.co.smart;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -54,15 +55,38 @@ public class BoardController {
 	private MemberDAO member;
 	@Autowired
 	private BCryptPasswordEncoder pw;
+
+	// 댓글 정보 삭제처리
+	@ResponseBody @RequestMapping("/comment/delete")
+	public boolean comment_delete(int id) {
+		// 해당 댓글정보를 DB에서 삭제
+		return service.board_comment_delete(id) == 1 ? true : false;
+	}
+	// 리턴하는 값이 없는 경우
+//	public void comment_delete(int id) {
+//		// 해당 댓글정보를 DB에서 삭제
+//		service.board_comment_delete(id);
+//	}
 	
 	// 댓글 정보 수정처리
 	// json으로 보내진 정보를 담기 위한 annotation : @RequestBody
+//	@ResponseBody @RequestMapping(value="/comment/update", produces = "application/text; charset=utf-8")
+//	public String comment_update(@RequestBody BoardCommentVO vo) {
 	@ResponseBody @RequestMapping("/comment/update")
-	public String comment_update(@RequestBody BoardCommentVO vo) {
+	public HashMap<String, String> comment_update(@RequestBody BoardCommentVO vo) {
 		// 화면에서 변경입력한 정보를 DB에 변경 저장처리
-		return service.board_comment_update(vo) == 1 ? "성공" : "실패";
+		// return service.board_comment_update(vo) == 1 ? "성공" : "실패";
+		// 응답화면에서 댓글 목록 전체를 다시 조회해오지 않고 변경 저장 된 댓글만 반영되게 처리
+		HashMap<String, String> map = new HashMap<String, String>();
+		if (service.board_comment_update(vo) == 1) {
+			map.put("message", "성공");
+			map.put("content", vo.getContent());
+		} else {
+			map.put("message", "실패");
+		}
+		return map;
 	}
-	
+
 	// 댓글목록조회
 	@RequestMapping("/comment/list/{board_id}")
 	public String comment_list(@PathVariable int board_id, Model model) {
@@ -72,12 +96,13 @@ public class BoardController {
 		model.addAttribute("lf", "\n");
 		return "board/comment/comment_list";
 	}
-	
+
 	// 댓글 등록처리
-	@ResponseBody @RequestMapping("/comment/register")
+	@ResponseBody
+	@RequestMapping("/comment/register")
 	public boolean comment_register(BoardCommentVO vo) {
 		// 화면에서 입력한 댓글 정보를 DB에 신규 저장
-		return service.board_comment_register(vo) == 1 ? true : false ;
+		return service.board_comment_register(vo) == 1 ? true : false;
 	}
 
 	// 선택한 방명록 정보 화면 요청

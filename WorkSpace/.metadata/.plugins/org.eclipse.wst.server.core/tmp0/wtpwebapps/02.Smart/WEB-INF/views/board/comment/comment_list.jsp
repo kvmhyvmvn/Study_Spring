@@ -30,7 +30,7 @@
 				<span>${vo.name} [ ${vo.writedate} ]</span>
 			</div>
 			
-			<c:if test="${loginInfo.userid eq vo.writer}">
+			<c:if test="${loginInfo.userid eq vo.writer or loginInfo.admin eq 'Y'}">
 			<div>
 				<span class="title me-4 d-none">댓글수정 [ <span class="writing">0</span>/200 ]</span>
 				<a class="btn btn-outline-info btn-sm btn-modify-save">수정</a>
@@ -63,7 +63,9 @@ $('.btn-modify-save').click(function(){
 			data: JSON.stringify( { id: _content.data('id'), content: _content.find('textarea').val() } )
 		}).done(function( response ){
 			console.log( response )
-			alert(response)
+			alert(response.message)
+			_content.find('.hidden').text(response.content);
+			stayStatus(_content);
 		});
 	}
 })
@@ -88,13 +90,35 @@ function modifyStatus( _content ){
 }
 
 
-//취소버튼 클릭시
+// 삭제/ 취소버튼 클릭시
 $('.btn-delete-cancel').click(function(){
 	var _content = $(this).closest('.content');
-	stayStatus( _content );
+	if($(this).text() == '취소')
+		stayStatus(_content);
+	else {
+		// 삭제클릭시
+		if(confirm('댓글을 삭제하시겠습니까?')){
+			// 댓글 삭제 후 댓글 목록을 다시 조회해오는 경우
+			/* $.ajax({
+				url: '<c:url value="/board/comment/delete"/>',
+				data: {id: _content.data('id')}
+			}).done(function(){
+				commentList();
+			}) */
+			// 댓글 삭제 후 해당 댓글 태그만 삭제하는 경우
+			$.ajax({
+				url: '<c:url value="/board/comment/delete"/>',
+				data: {id: _content.data('id')}
+			}).done(function(response){
+				if(response) {
+					_content.remove();
+				}
+			})
+		}
+	}
 })
 
-//가만있는 모드 상태
+// 가만있는 모드 상태
 function stayStatus( _content ){
 	//버튼은 수정/삭제
 	_content.find('.btn-modify-save').text('수정')
