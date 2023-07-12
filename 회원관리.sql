@@ -28,4 +28,20 @@ alter table member add (social varchar2(1));
 -- 소셜 로그인 경우 userpw 정보가 없고 email가 없을수도 있다.
 alter table member modify(userpw null, email null);
 
-select * from customer where id = 2;
+select * from customer order by id desc;
+
+insert into customer (name, phone, email) values
+     ('심청', '12345678', 'aa@gmail.com');
+
+
+insert into customer
+select *
+from customer;
+
+select count(*) from customer;
+
+update customer set name = name where id = id
+
+commit;
+
+delete from customer where id = 2;
