@@ -1,0 +1,31 @@
+/**
+ * 유기동물 관련 처리
+ */
+ 
+ // 사진 크게 보기
+ $(document).on('click', '.popfile img', function(){
+	$('#modal-image .modal-body').html($(this).clone());
+	$('#modal-image .modal-body img').removeAttr('style');
+	new bootstrap.Modal($('#modal-image')).show();
+})
+ 
+ 
+ //유기동물목록 조회
+function animal_list( pageNo ){
+	$('.pharmacy-top').addClass('d-none');
+	$('#data-list').empty();
+	$('.pagination').closest('nav').remove(); // 페이지목록이 이미 있으면 삭제
+	
+	$('.loading').show();
+	
+	var animal = page; 
+	
+	$.ajax({
+		url: 'animal/list',
+		data: { pageNo: pageNo, rows: page.pageList},
+		async: false,
+	}).done(function(response){
+		$('#data-list').html(response);
+	})
+	setTimeout(function(){$('.loading').hide()}, 500);
+}
