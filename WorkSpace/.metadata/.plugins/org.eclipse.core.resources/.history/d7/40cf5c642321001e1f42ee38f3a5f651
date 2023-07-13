@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="emp">
+
+<select id="list" resultType="employees.EmployeesVO">
+	select employee_id, first_name || ' ' || last_name emp_name, 
+    	case when mod(employee_id, 2)=0 then email || '@gmail.com'
+        else email || '@naver.com' end as email,
+        replace(phone_number, '.', '-') as phone_number,
+        to_char(hire_date, 'YYYY-MM-DD') as hire_date
+	from employees
+</select>
+	
+</mapper>
