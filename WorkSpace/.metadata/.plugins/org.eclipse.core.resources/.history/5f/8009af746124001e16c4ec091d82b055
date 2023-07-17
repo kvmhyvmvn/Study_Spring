@@ -1,0 +1,5 @@
+package smart.visual;
+
+public interface VisualService {
+
+}

@@ -26,7 +26,7 @@
 	<c:when test="${category eq 'join'}">
 		<c:set var="title" value="회원가입" />
 	</c:when>
-	<c:when test="${category eq 'hm'}">
+	<c:when test="${category eq 'khm'}">
 		<c:set var="title" value="김혜민" />
 	</c:when>
 </c:choose>
@@ -79,10 +79,10 @@
 					class="${category eq 'bo' ? 'active':''} list-group-item list-group-item-action list-group-item-light p-3">방명록</a>
 				<a href="<c:url value='/data/list'/>"
 					class="${category eq 'da' ? 'active':''} list-group-item list-group-item-action list-group-item-light p-3">공공데이터</a>
-				<a href=""
+				<a href="<c:url value='/visual/list'/>"
 					class="${category eq 'vi' ? 'active':''} list-group-item list-group-item-action list-group-item-light p-3">시각화</a>
-				<a href=""
-					class="${category eq 'hm' ? 'active':''} list-group-item list-group-item-action list-group-item-light p-3">김혜민</a>
+				<a href="<c:url value='/khm/list'/>"
+					class="${category eq 'khm' ? 'active':''} list-group-item list-group-item-action list-group-item-light p-3">김혜민</a>
 			</div>
 		</div>
 		<!-- Page content wrapper-->
