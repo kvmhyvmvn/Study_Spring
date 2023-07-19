@@ -1,0 +1,6 @@
+package smart.visual;
+
+public interface VisualService {
+	void department(); // 부서별 사원 수 조회
+	// 영업부 : 10, 총무부 : 20
+}

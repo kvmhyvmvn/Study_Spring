@@ -70,6 +70,7 @@ from (select to_char(hire_date, 'mm') mm from employees)
 pivot(count(*) for mm in ('01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'))
 ;
 
+-- 상위 3위 부서 월별 채용수
 select *
 from (select department_name, to_char(hire_date, 'mm') unit
       from employees e inner join
@@ -81,9 +82,30 @@ from (select department_name, to_char(hire_date, 'mm') unit
      )
      pivot(count(*) for unit in ('01' "01월", '02' "02월", '03' "03월", '04' "04월", '05' "05월", '06' "06월", '07' "07월", '08' "08월", '09' "09월", '10' "10월", '11' "11월", '12' "12월"))
 order by department_name;
+
+-- 상위 3위 부서 년도별 채용수
+select *
+from (select department_name, to_char(hire_date, 'yyyy') unit
+      from employees e inner join
+        (select rank, department_id, '(TOP' || rank || ')'|| department_name department_name
+         from (select dense_rank() over(order by count(*) desc) rank, department_id, count(employee_id) count
+                    from employees
+                    group by department_id) e left outer join departments d using(department_id)
+               where rank <= 3) r using(department_id)
+     )
+     pivot(count(*) for unit in ('2001' "2001년", '2002' "2002년", '2003' "2003년", '2004' "2004년", '2005' "2005년", '2006' "2006년", '2007' "2007년", '2008' "2008년", '2023' "2023년"))
+order by department_name;
         
-
-
-
+/*
+2001년
+2002년
+2003년
+2004년
+2005년
+2006년
+2007년
+2008년
+2023년
+*/
 
 

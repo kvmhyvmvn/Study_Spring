@@ -7,8 +7,16 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-	#legend span {width:44px; height:17px; margin-right: 5px}
-	#legend li {display: flex; align-items: center;}
+#legend span {
+	width: 44px;
+	height: 17px;
+	margin-right: 5px
+}
+
+#legend li {
+	display: flex;
+	align-items: center;
+}
 </style>
 </head>
 <body>
@@ -24,41 +32,44 @@
 		<!-- 부서원수에 대한 막대/도넛 그래프 선택 -->
 		<div class="tab text-center mt-4">
 			<div class="form-check form-check-inline">
-			  <label>
-			  	<input class="form-check-input" type="radio" name="chart" value="bar" checked > 막대그래프
-			  </label>
+				<label> <input class="form-check-input" type="radio"
+					name="chart" value="bar" checked> 막대그래프
+				</label>
 			</div>
 			<div class="form-check form-check-inline">
-  			  <label>
-  				<input class="form-check-input" type="radio" name="chart" value="donut"> 도넛그래프
-  			  </label>
+				<label> <input class="form-check-input" type="radio"
+					name="chart" value="donut"> 도넛그래프
+				</label>
 			</div>
 		</div>
 		<!-- 채용 인원수에 대한 년도별/월별 선택 -->
 		<div class="tab text-center mt-4">
 			<div class="form-check form-check-inline">
-			  <label>
-				 <input class="form-check-input" type="checkbox" id="top3" > TOP3 부서
-			  </label>
+				<label> <input class="form-check-input" type="checkbox"
+					id="top3"> TOP3 부서
+				</label>
 			</div>
 			<div class="form-check form-check-inline">
-			  <label>
-			  	<input class="form-check-input" type="radio" name="unit" value="year" checked > 년도별
-			  </label>
+				<label> <input class="form-check-input" type="radio"
+					name="unit" value="year" checked> 년도별
+				</label>
 			</div>
 			<div class="form-check form-check-inline">
-  			  <label>
-  				<input class="form-check-input" type="radio" name="unit" value="month"> 월별
-  			  </label>
+				<label> <input class="form-check-input" type="radio"
+					name="unit" value="month"> 월별
+				</label>
 			</div>
 		</div>
 		<canvas id="chart" class="h-100 m-auto"></canvas>
 	</div>
-	
 
-	<script src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.js"></script> <!-- 차트라이브러리 -->
-	<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script> <!-- 데이터라벨 -->
-	<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-autocolors@0.2.2/dist/chartjs-plugin-autocolors.min.js"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.js"></script>
+	<!-- 차트라이브러리 -->
+	<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+	<!-- 데이터라벨 -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/chartjs-plugin-autocolors@0.2.2/dist/chartjs-plugin-autocolors.min.js"></script>
 	<script>
 		Chart.defaults.font.size = 16;
 
@@ -98,12 +109,72 @@
 		// 부서원수 상위 3위까지의 년도별/월별 채용인원수
 		function hirement_top3() {
 			initCanvas();
-			var unit = $('[name=unit]:checked').val();
+			var unit = $('[name=unit]:checked').val(); // year/month
 			$.ajax({
 				url: 'hirement/top3/' + unit,
 			}).done(function(response){
 				console.log(response)
+				// 년도별: 막대, 월별 : 선
+				var info = {};
+				info.type = unit=='year' ? 'bar' : 'line';
+				info.title = `상위 3위 부서의 \${unit=='year' ? '년도별' : '월별'} 채용인원수`;
+				info.category = response.unit;
+				info.datas = [], info.label = [];
+				$(response.list).each(function(idx, item){
+					// item == $(this)
+					info.label.push(this.DEPARTMENT_NAME);
+					// 배열로 이루어진 category의 값을 키로 하여 새로운 배열을 뽑아내기
+					var datas = info.category.map(function(category){
+						return item[category];
+					});
+					info.datas.push(datas);
+				})
+				console.log(info)
+				top3Chart(info);
 			})
+		}
+		
+		function top3Chart( info ){
+			$('#tab-content').css('height', 560);
+			var datas = [];
+			for(var idx=0; idx<info.label.length; idx++) {
+				var department = {};	
+				department.label = info.label[idx];
+				department.data = info.datas[idx];
+				department.backgroundColor = colors[idx];
+				department.borderColor = colors[idx];
+				datas.push(department);
+			}
+			
+			visual = new Chart( $('#chart'), {
+				type: info.type,
+				data: {
+					labels: info.category,
+					datasets:  datas,
+				},
+				options:{
+					layouts: { padding:{ top:30 }},
+					plugins: {
+						datalabels :{
+							formatter: function(v){
+								return v==0 ? '' : `\${v}명`;
+							}
+						},
+						legend: {
+							display: true,
+							labels: { font:{size:14} },
+						}
+					},
+					responsive: false,
+					maintainAspectRatio : false,
+					scales: {
+						y: {
+							title: { text:info.title, display:true }
+						}
+					}
+				}
+			} );
+			
 		}
 		
 		function initCanvas() {
@@ -123,7 +194,8 @@
 				if (idx == 0)
 					department(); //부서원수 조회
 				else if (idx == 1)
-					hirement(); //채용인원수 조회
+					hirement_info(); //채용인원수 조회
+					else initCanvas();
 			},
 
 			'mouseover' : function() {

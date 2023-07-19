@@ -14,7 +14,7 @@ import retrofit.RetrofitVO;
 public class RetrofitController {
 	@Autowired RetrofitDAO dao;
 
-	@RequestMapping("/select")
+	@RequestMapping(value="/list", produces="text/html;charset=utf-8")
 	public String list() {
 		return new Gson().toJson(dao.select());
 	}

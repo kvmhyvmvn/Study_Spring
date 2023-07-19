@@ -9,7 +9,7 @@
 	
 	<insert id="insert">
 		insert into crud_retrofit (col_no, col1, col2)
-		values (#{col_no}, #{col1}, #{col2})
+		values (SEQ_CRUD_RETROFIT.NEXTVAL, #{col1}, #{col2})
 	</insert>
 	
 	<update id="update">
