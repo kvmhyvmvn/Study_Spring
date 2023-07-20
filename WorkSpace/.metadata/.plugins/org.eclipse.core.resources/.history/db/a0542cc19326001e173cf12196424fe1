@@ -12,8 +12,8 @@ public class RetrofitDAO {
 	@Autowired @Qualifier("hanul")
 	SqlSession sql;
 	
-	public List<RetrofitVO> list() {
-		return sql.selectList("retrofit.list");
+	public List<RetrofitVO> select() {
+		return sql.selectList("retrofit.select");
 	}
 	
 	public int insert(RetrofitVO vo) {
