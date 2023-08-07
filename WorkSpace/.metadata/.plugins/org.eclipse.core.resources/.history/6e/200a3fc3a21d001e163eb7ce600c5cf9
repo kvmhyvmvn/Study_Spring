@@ -1,0 +1,18 @@
+package com.hanul.exam;
+
+import java.util.List;
+
+import org.springframework.web.bind.annotation.RestController;
+
+import customer.CustomerVO;
+
+@RestController
+public class CustomerController {
+	
+	public String list() {
+		List<CustomerVO> list;
+		
+		return "list";
+	}
+
+}

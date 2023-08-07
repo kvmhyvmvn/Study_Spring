@@ -1,0 +1,12 @@
+package com.hanul.exam;
+
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class CustomerController {
+	
+	public String list() {
+		return "list";
+	}
+
+}
