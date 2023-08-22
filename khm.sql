@@ -43,7 +43,7 @@ id      number constraint khm_comment_id_pk primary key,
 content varchar2(1000) not null /* 댓글 내용 */,
 writer  varchar2(50) not null /* 글쓴이 아이디 */,
 writedate date default sysdate /* 작성 일자 */,
-board_id number /* 방명록 글의 pk인 id */,
+khm_id number /* 방명록 글의 pk인 id */,
 constraint khm_comment_writer_fk foreign key(writer)
                 references member(userid) on delete cascade,
 constraint khm_comment_khm_id_fk foreign key(khm_id)
