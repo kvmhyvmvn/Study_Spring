@@ -9,13 +9,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import smart.common.CommonUtility;
 import smart.common.PageVO;
+import smart.khm.KhmDAO;
+import smart.member.MemberVO;
 
-@Controller @RequestMapping("/khm")
+@Controller
+@RequestMapping("/khm")
 public class KhmController {
-	
-	@Autowired @Qualifier("hanul")
-	SqlSession sql;
+	@Autowired
+	private KhmDAO service;
+	@Autowired
+	private CommonUtility common;
 	
 	// 목록 화면 요청
 	@RequestMapping("/list")
@@ -25,11 +30,16 @@ public class KhmController {
 		String userpw = "Abc123";
 //		MemberVO login = member.member_info(userid);
 //		if (pw.matches(userpw, login.getUserpw())) {
-//			// session.setAttribute("loginInfo", login);
+			// session.setAttribute("loginInfo", login);
 //		}
-
-		//model.addAttribute("page", service.board_list(page));
-		//session.setAttribute("category", "bo");
-		return "board/list";
+		model.addAttribute("page", service.khm_list(page));
+		session.setAttribute("category", "khm");
+		return "khm/list";
+	}
+	
+	// 신규 입력 화면 요청
+	@RequestMapping("/new")
+	public String board() {
+		return "khm/new";
 	}
 }

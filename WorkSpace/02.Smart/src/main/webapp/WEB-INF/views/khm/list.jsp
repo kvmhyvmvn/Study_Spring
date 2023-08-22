@@ -17,7 +17,7 @@ table {
 </head>
 <body>
 	<h3 class="my-4">김혜민</h3>
-<form method="post" action="list">
+	<form method="post" action="list">
 		<div class="row justify-content-between mb-3">
 			<div class="col-auto">
 				<div class="input-group">
@@ -44,17 +44,10 @@ table {
 							</c:forEach>
 						</select>
 					</div>
-					<!-- 보기형태(리스트,그리드) 선택 -->
-					<div class="col-auto">
-						<select class="form-select" name="viewType">
-							<option value="list">리스트</option>
-							<option value="grid">그리드</option>
-						</select>
-					</div>
 					<!-- 로그인 된 경우만 글쓰기 가능 -->
 					<c:if test="${!empty loginInfo }">
 						<div class="col-auto">
-							<a class="btn btn-primary" href="new">새글쓰기</a>
+							<a class="btn btn-info" href="new">새글쓰기</a>
 						</div>
 					</c:if>
 				</div>
@@ -63,71 +56,44 @@ table {
 		<input type="hidden" name="curPage" value="1">
 		<input type="hidden" name="id">
 	</form>
-
-	<c:if test="${page.viewType eq 'grid'}">
-		<div class="row">
-		<c:forEach items="${page.list}" var="vo">
-			<div class="col-xl-3-20 col-md-6 mb-4">
-		        <div class="card">
-		            <div class="card-body">
-		            	<div class="text-truncate-v3 ">
-		            	<a class="text-link" href="javascript:info(${vo.id})">${vo.title }</a>
-		            	</div>
-		            </div>
-		            <div class="card-footer">
-		            <div>${vo.name }</div>
-		            	<div class="d-flex align-items-center justify-content-between">
-		            		<div>${vo.writedate}</div>
-		            		<c:if test="${vo.filecnt gt 0 }"><i class="fa-solid fa-paperclip"></i></c:if>
-		            	</div>
-		            </div>
-		        </div>
-		    </div>
-		</c:forEach>
-		</div>
-	</c:if>
-
-	<c:if test="${page.viewType eq 'list'}">
-		<table class="tb-list">
-			<colgroup>
-				<col width="100px">
-				<col>
-				<col width="120px">
-				<col width="120px">
-				<col width="100px">
-			</colgroup>
+	<table class="tb-list">
+		<colgroup>
+			<col width="100px">
+			<col>
+			<col width="120px">
+			<col width="120px">
+			<col width="100px">
+		</colgroup>
+		<tr>
+			<th>번호</th>
+			<th>제목</th>
+			<th>작성자</th>
+			<th>작성일자</th>
+			<th>조회수</th>
+		</tr>
+		<c:if test="${empty page}">
 			<tr>
-				<th>번호</th>
-				<th>제목</th>
-				<th>작성자</th>
-				<th>작성일자</th>
-				<th>조회수</th>
+				<td colspan="5">방명록 글이 없습니다</td>
 			</tr>
-			<c:if test="${empty page.list }">
-				<tr>
-					<td colspan="5">방명록 글이 없습니다</td>
-				</tr>
-			</c:if>
-			<c:forEach items="${page.list}" var="vo">
-				<tr>
-					<td>${vo.no }</td>
-					<td class="text-start text-truncate"><a class="text-link" href="javascript:info(${vo.id})">${vo.title }</a>
-					<c:if test="${vo.filecnt gt 0 }">
-							<i class="fa-solid fa-paperclip"></i>
-					</c:if></td>
-					<td>${vo.name }</td>
-					<td>${vo.writedate }</td>
-					<td>${vo.readcnt }</td>
-				</tr>
-			</c:forEach>
-		</table>
-	</c:if>
+		</c:if>
+		<c:forEach items="${page}" var="vo">
+			<tr>
+				<td>${vo.no }</td>
+				<td class="text-start text-truncate"><a class="text-link" href="javascript:info(${vo.id})">${vo.title }</a>
+				<c:if test="${vo.filecnt gt 0 }">
+						<i class="fa-solid fa-paperclip"></i>
+				</c:if></td>
+				<td>${vo.name }</td>
+				<td>${vo.writedate }</td>
+				<td>${vo.readcnt }</td>
+			</tr>
+		</c:forEach>
+	</table>
 	
 	<!-- 
 	table 태그의 td의 내용이 길어질 때 .. 처리하라면
 	table 태그의 css에서 table-layout: fixed로 지정 + td에 text-truncate 클래스 지정
 	 -->
-	
 	
 	<jsp:include page="/WEB-INF/views/include/page.jsp" />
 

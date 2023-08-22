@@ -1,0 +1,5 @@
+package smart.khm;
+
+public interface KhmService {
+
+}
